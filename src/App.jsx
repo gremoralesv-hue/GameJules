@@ -124,7 +124,7 @@ function App() {
       <div className="game-container">
         {gameState === 'menu' && (
           <div className="menu">
-            <h1>Economía de la Distracción</h1>
+            <h1>Confiar o no confiar</h1>
             <p>Desliza Izquierda = FALSO</p>
             <p>Desliza Derecha = VERDADERO</p>
             <button onClick={startGame}>Iniciar Juego</button>
