@@ -1,0 +1,10 @@
+{
+  "name": "distraction-economy-game",
+  "compatibility_date": "2025-02-17",
+  "assets": {
+    "directory": "./dist"
+  },
+  "observability": {
+    "enabled": true
+  }
+}
