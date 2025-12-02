@@ -18,6 +18,7 @@ function App() {
   const [gameResult, setGameResult] = useState(null); // 'win', 'lose'
   const [feedbackData, setFeedbackData] = useState(null);
   const [interactionState, setInteractionState] = useState('neutral'); // 'neutral', 'correct', 'wrong'
+  const [gameCards, setGameCards] = useState(cards);
 
   // Timers Refs
   const globalTimerRef = useRef(null);
@@ -26,7 +27,16 @@ function App() {
   // Constants
   const MAX_CARDS = cards.length;
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   const startGame = () => {
+    setGameCards(shuffleArray([...cards]));
     setGameState('playing');
     setScore(0);
     setLives(3);
@@ -35,6 +45,10 @@ function App() {
     setCardTimer(8);
     setMaxCardTime(8);
     setGameResult(null);
+  };
+
+  const goToMenu = () => {
+    setGameState('menu');
   };
 
   const handleCorrect = () => {
@@ -51,7 +65,7 @@ function App() {
     // Pause Game
     setGameState('feedback');
     setFeedbackData({
-      card: cards[currentCardIndex],
+      card: gameCards[currentCardIndex],
       reason: reason || "Incorrect Choice"
     });
   };
@@ -124,7 +138,7 @@ function App() {
       <div className="game-container">
         {gameState === 'menu' && (
           <div className="menu">
-            <h1>Economía de la Distracción</h1>
+            <h1>Confiar o no confiar</h1>
             <p>Desliza Izquierda = FALSO</p>
             <p>Desliza Derecha = VERDADERO</p>
             <button onClick={startGame}>Iniciar Juego</button>
@@ -149,21 +163,21 @@ function App() {
             </div>
 
             <Card
-              data={cards[currentCardIndex]}
+              data={gameCards[currentCardIndex]}
               cardTimer={cardTimer}
               maxCardTime={maxCardTime}
               onSwipe={(direction) => {
                 if (direction === 'left') {
-                  cards[currentCardIndex].type === 'fake' ? handleCorrect() : handleWrong("¡Era VERDADERO!");
+                  gameCards[currentCardIndex].type === 'fake' ? handleCorrect() : handleWrong("¡Era VERDADERO!");
                 } else if (direction === 'right') {
-                   cards[currentCardIndex].type === 'real' ? handleCorrect() : handleWrong("¡Era FALSO!");
+                   gameCards[currentCardIndex].type === 'real' ? handleCorrect() : handleWrong("¡Era FALSO!");
                 }
               }}
             />
 
             <Controls
-              onFake={() => cards[currentCardIndex].type === 'fake' ? handleCorrect() : handleWrong("¡Era VERDADERO!")}
-              onReal={() => cards[currentCardIndex].type === 'real' ? handleCorrect() : handleWrong("¡Era FALSO!")}
+              onFake={() => gameCards[currentCardIndex].type === 'fake' ? handleCorrect() : handleWrong("¡Era VERDADERO!")}
+              onReal={() => gameCards[currentCardIndex].type === 'real' ? handleCorrect() : handleWrong("¡Era FALSO!")}
             />
           </div>
         )}
@@ -173,7 +187,10 @@ function App() {
             <h2>¡Fallaste!</h2>
             <p>{feedbackData.reason}</p>
             <p className="lesson">{feedbackData.card.explanation}</p>
-            <button onClick={continueGame}>Continuar</button>
+            <div className="button-group">
+                <button onClick={continueGame}>Continuar</button>
+                <button onClick={goToMenu} className="secondary-button">Volver al Menú</button>
+            </div>
           </div>
         )}
 
@@ -181,7 +198,10 @@ function App() {
           <div className="game-over">
             <h2>{gameResult === 'win' ? '¡Victoria!' : 'Juego Terminado'}</h2>
             <p>Puntaje Final: {score}</p>
-            <button onClick={startGame}>Jugar de Nuevo</button>
+            <div className="button-group">
+                <button onClick={startGame}>Jugar de Nuevo</button>
+                <button onClick={goToMenu} className="secondary-button">Volver al Menú</button>
+            </div>
           </div>
         )}
       </div>
