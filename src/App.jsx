@@ -198,6 +198,7 @@ function App() {
             <h2>{gameResult === 'win' ? '¡Victoria!' : 'Juego Terminado'}</h2>
             <p>Puntaje Final: {score}</p>
             <div className="button-group">
+                <button onClick={() => window.location.href = 'https://www.figma.com/design/Gdbqp8zrCqdaaoXEpvpVxj/Detectives?node-id=33-110&t=dmr98f17TALmywcR-1'}>SEGUIR HISTORIA</button>
                 <button onClick={startGame}>Jugar de Nuevo</button>
                 <button onClick={goToMenu} className="secondary-button">Volver al Menú</button>
             </div>
