@@ -4,7 +4,6 @@ import Card from './components/Card'
 import Controls from './components/Controls'
 import { cards } from './data/cards'
 import './App.css'
-import './Layout.css'
 
 function App() {
   // Game State
@@ -138,7 +137,7 @@ function App() {
       <div className="game-container">
         {gameState === 'menu' && (
           <div className="menu">
-            <h1>Economía de la Distracción</h1>
+            <h1>Confiar o no confiar</h1>
             <p>Desliza Izquierda = FALSO</p>
             <p>Desliza Derecha = VERDADERO</p>
             <button onClick={startGame}>Iniciar Juego</button>
