@@ -2,6 +2,11 @@
 .game-container {
   position: relative;
   z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .app-container {
@@ -14,62 +19,87 @@
   padding: 20px;
 }
 
-/* Menu */
-.menu {
+/* Common Overlay Style (Neo-Pop Box) */
+.menu, .game-over, .feedback-overlay {
   text-align: center;
   z-index: 10;
-  background: rgba(30, 30, 30, 0.8);
+  background: var(--color-white);
   padding: 40px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  border: 4px solid var(--color-outline);
+  box-shadow: 10px 10px 0px var(--color-accent-orange);
   max-width: 400px;
+  position: relative;
 }
 
+/* Menu Specifics */
 .menu h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   margin-bottom: 2rem;
-  background: linear-gradient(45deg, var(--color-accent), var(--color-accent-blue));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--color-accent-pink);
+  text-shadow: 2px 2px 0px var(--color-outline);
+  transform: rotate(-2deg);
 }
 
-.menu button {
-  margin-top: 2rem;
-  padding: 16px 32px;
-  font-size: 1.2rem;
+.menu p {
   font-weight: bold;
-  background: #fff;
-  color: #000;
-  border: none;
+  color: var(--color-text-main);
+  margin: 0.5rem 0;
+}
+
+.menu button, .game-over button, .feedback-overlay button {
+  margin-top: 1.5rem;
+  padding: 16px 32px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: 'Shrikhand', serif;
+  text-transform: uppercase;
+  background: var(--color-interactive-cyan);
+  color: var(--color-white);
+  border: 3px solid var(--color-outline);
   border-radius: 50px;
   cursor: pointer;
-  transition: transform 0.2s;
+  box-shadow: 4px 4px 0px var(--color-outline);
+  transition: transform 0.1s, box-shadow 0.1s;
 }
 
-.menu button:hover {
-  transform: scale(1.05);
+.menu button:active, .game-over button:active, .feedback-overlay button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-outline);
 }
 
-/* Game Active */
+.secondary-button {
+  background: var(--color-white) !important;
+  color: var(--color-outline) !important;
+  margin-top: 10px !important;
+  font-size: 1.2rem !important;
+}
+
+/* Game Active Layout */
 .game-active {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   max-width: 480px;
+  height: 100vh;
+  justify-content: space-between;
+  padding: 20px 0;
   z-index: 10;
 }
 
+/* HUD (Retro Pill Bar) */
 .hud {
   display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 10px 20px;
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  background: var(--color-white);
+  border: 3px solid var(--color-outline);
+  border-radius: 50px;
+  padding: 10px;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  margin-top: 10px;
 }
 
 .hud-item {
@@ -80,72 +110,64 @@
 
 .hud-label {
   font-size: 0.7rem;
+  font-weight: 900;
   text-transform: uppercase;
-  color: var(--color-text-secondary);
+  color: var(--color-accent-pink);
+  letter-spacing: 1px;
 }
 
 .hud-value {
-  font-size: 1.2rem;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--color-outline);
 }
 
-/* Feedback Overlay */
+/* Feedback Overlay Specifics */
 .feedback-overlay {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
-  max-width: 400px;
-  background: rgba(30, 30, 30, 0.95);
-  border: 2px solid var(--color-error);
-  padding: 30px;
-  border-radius: 16px;
-  text-align: center;
-  z-index: 100;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-  animation: popIn 0.3s ease-out;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .feedback-overlay h2 {
-  color: var(--color-error);
-  font-size: 2rem;
+  color: var(--color-accent-pink);
+  font-size: 2.5rem;
   margin-bottom: 10px;
+  text-shadow: 2px 2px 0 var(--color-outline);
 }
 
 .lesson {
   font-size: 1rem;
-  color: #ccc;
-  margin: 20px 0;
-  line-height: 1.5;
-  background: rgba(0,0,0,0.3);
+  color: var(--color-text-main);
+  background: rgba(255, 205, 0, 0.3); /* Transparent Yellow */
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 2px dashed var(--color-outline);
+  margin: 20px 0;
+  line-height: 1.4;
 }
 
-.feedback-overlay button {
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: bold;
-  background: var(--color-text);
-  color: var(--color-bg);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Game Over */
-.game-over {
-  text-align: center;
-  z-index: 10;
-  background: rgba(30, 30, 30, 0.9);
-  padding: 40px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
+/* Game Over Specifics */
+.game-over h2 {
+  font-size: 3rem;
+  color: var(--color-interactive-cyan);
+  -webkit-text-stroke: 1px var(--color-outline);
+  text-shadow: 3px 3px 0 var(--color-outline);
 }
 
 @keyframes popIn {
-  from { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  from { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
   to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
 }

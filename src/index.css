@@ -1,10 +1,22 @@
 :root {
+  /* Neo-Pop / Retro-Groovy Palette */
+  --color-bg-yellow: #FFCD00;      /* Pantone 116C */
+  --color-interactive-cyan: #2CCCD3; /* Pantone 3252C */
+  --color-accent-pink: #F24789;    /* Pantone 191C */
+  --color-accent-orange: #FF8F1C;  /* Pantone 1495C */
+
+  --color-outline: #5D4037;        /* Dark Brown for outlines */
+  --color-text-main: #3E2723;      /* Dark text */
+  --color-white: #FFFFFF;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color-scheme: dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: transparent;
+
+  color-scheme: light; /* Force light mode preference */
+  color: var(--color-text-main);
+  background-color: var(--color-bg-yellow);
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -13,12 +25,20 @@
 
 body {
   margin: 0;
-  padding: 0;
+  display: flex;
+  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  overflow: hidden; /* Prevent scrolling for the app */
+  background-color: var(--color-bg-yellow);
+  overflow: hidden; /* Prevent scroll on mobile */
 }
 
-* {
-  box-sizing: border-box;
+h1, h2, h3, h4 {
+  font-family: 'Shrikhand', serif;
+  font-weight: 400; /* Shrikhand is naturally bold */
+  letter-spacing: 0.05em;
+}
+
+button {
+  font-family: inherit;
 }
